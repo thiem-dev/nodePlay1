@@ -1,25 +1,17 @@
-'use strict';
+// console.log(`Listening on port http://localhost:${port}/`);
 
-var fs = require('fs');
-var path = require('path');
-var guestsPath = path.join(__dirname, 'guests.json');
+
+//catServer.js
+'use strict';
 
 var http = require('http');
 var port = process.env.PORT || 8000;
 
 var server = http.createServer(function(req, res) {
-  if (req.method === 'GET' && req.url === '/guests') {
-    fs.readFile(guestsPath, 'utf8', function(err, guestsJSON) {
-      if (err) {
-        console.error(err.stack);
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/plain');
-        return res.end('Internal Server Error');
-      }
+  if (req.method === 'GET' && req.url === '/cats') {
 
-      res.setHeader('Content-Type', 'application/json');
-      res.end(guestsJSON);
-    });
+    res.setHeader('Content-Type', 'application/json');
+    res.end("meow");
   }
   else {
     res.statusCode = 404;
@@ -29,5 +21,5 @@ var server = http.createServer(function(req, res) {
 });
 
 server.listen(port, function() {
-  console.log('Listening on port', port);
+  console.log(`Listening on port http://localhost:${port}/`);
 });
